@@ -1,8 +1,14 @@
 class LLNode(object):
 	def __init__(self, value):
-		self.value = value
 		self.next = None
 		self.last = self
+
+		if isinstance(value, list):
+			self.value = value[0]
+			for item in value[1:]:
+				self.append_value(item)
+		else:
+			self.value = value
 
 	def append_value(self, value):
 		self.last.next = LLNode(value)
@@ -25,3 +31,4 @@ if __name__ == "__main__":
 	for i in xrange(2, 10):
 		l.append_value(i)
 	print l
+	print LLNode(range(1,10))
