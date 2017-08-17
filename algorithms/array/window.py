@@ -22,6 +22,7 @@ def subarray_max_sum_limited(l, k):
 	for i in xrange(len(l)):
 		if curr_sum > k:
 			curr_sum -= l[start]
+			start += 1
 		else:
 			curr_sum += l[i]
 		if curr_sum > max_sum and curr_sum < k:
