@@ -46,7 +46,7 @@ root.left = BTNode(7)
 root.right = BTNode(5)
 root.right.right = BTNode(9)
 
-print product_of_leaves(root)
+# print product_of_leaves(root)
 
 root = BTNode(2)
 root.left = BTNode(7)
@@ -59,4 +59,25 @@ root.right.right = BTNode(9)
 root.right.right.left = BTNode(4)
 root.right.right.right = BTNode(10)
 
-print product_of_leaves(root)
+# print product_of_leaves(root)
+
+def left_to_right_leaves(root):
+	if root:
+		if not root.left and not root.right:
+			print root.value
+		else:
+			left_to_right_leaves(root.left)
+			left_to_right_leaves(root.right)
+
+root = BTNode(1)
+root.left = BTNode(2)
+root.left.left = BTNode(4)
+root.right = BTNode(3)
+root.right.left = BTNode(5)
+root.right.left.left = BTNode(6)
+root.right.left.right = BTNode(7)
+root.right.right = BTNode(8)
+root.right.right.left = BTNode(9)
+root.right.right.right = BTNode(10)
+
+left_to_right_leaves(root)
