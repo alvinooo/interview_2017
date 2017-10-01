@@ -80,4 +80,31 @@ root.right.right = BTNode(8)
 root.right.right.left = BTNode(9)
 root.right.right.right = BTNode(10)
 
-left_to_right_leaves(root)
+# left_to_right_leaves(root)
+
+def most_nodes_level(root):
+	max_nodes, max_level, curr_level = 0, 1, 1
+	q = deque()
+	q.append(root)
+	while q:
+		len_q = len(q)
+		if len_q > max_nodes:
+			max_nodes, max_level = len_q, curr_level
+		for i in xrange(len_q):
+			node = q.popleft()
+			if node.left:
+				q.append(node.left)
+			if node.right:
+				q.append(node.right)
+		curr_level += 1
+	return max_level
+
+root = BTNode(2)
+root.left = BTNode(1)
+root.left.left = BTNode(4)
+root.left.right = BTNode(6)
+root.left.right.left = BTNode(5)
+root.right = BTNode(3)
+root.right.right = BTNode(8)
+
+print most_nodes_level(root)
