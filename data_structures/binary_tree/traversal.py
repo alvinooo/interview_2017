@@ -15,13 +15,15 @@ def reverse_level_order(root):
 	while s:
 		print s.pop().value
 
-root = BTNode(1)
-root.left = BTNode(2)
-root.right = BTNode(3)
-root.left.left = BTNode(4)
-root.left.right = BTNode(5)
+def test_reverse_level_order():
+	root = BTNode(1)
+	root.left = BTNode(2)
+	root.right = BTNode(3)
+	root.left.left = BTNode(4)
+	root.left.right = BTNode(5)
+	reverse_level_order(root)
 
-# reverse_level_order(root)
+# test_reverse_level_order()
 
 def product_of_leaves(root):
 	q = deque()
@@ -41,25 +43,26 @@ def product_of_leaves(root):
 			product *= curr_sum
 	return product
 
-root = BTNode(2)
-root.left = BTNode(7)
-root.right = BTNode(5)
-root.right.right = BTNode(9)
+def test_product_of_leaves():
+	root = BTNode(2)
+	root.left = BTNode(7)
+	root.right = BTNode(5)
+	root.right.right = BTNode(9)
+	print product_of_leaves(root)
 
-# print product_of_leaves(root)
+	root = BTNode(2)
+	root.left = BTNode(7)
+	root.left.left = BTNode(8)
+	root.left.right = BTNode(6)
+	root.left.right.left = BTNode(1)
+	root.left.right.right = BTNode(11)
+	root.right = BTNode(5)
+	root.right.right = BTNode(9)
+	root.right.right.left = BTNode(4)
+	root.right.right.right = BTNode(10)
+	print product_of_leaves(root)
 
-root = BTNode(2)
-root.left = BTNode(7)
-root.left.left = BTNode(8)
-root.left.right = BTNode(6)
-root.left.right.left = BTNode(1)
-root.left.right.right = BTNode(11)
-root.right = BTNode(5)
-root.right.right = BTNode(9)
-root.right.right.left = BTNode(4)
-root.right.right.right = BTNode(10)
-
-# print product_of_leaves(root)
+# test_product_of_leaves()
 
 def left_to_right_leaves(root):
 	if root:
@@ -69,18 +72,20 @@ def left_to_right_leaves(root):
 			left_to_right_leaves(root.left)
 			left_to_right_leaves(root.right)
 
-root = BTNode(1)
-root.left = BTNode(2)
-root.left.left = BTNode(4)
-root.right = BTNode(3)
-root.right.left = BTNode(5)
-root.right.left.left = BTNode(6)
-root.right.left.right = BTNode(7)
-root.right.right = BTNode(8)
-root.right.right.left = BTNode(9)
-root.right.right.right = BTNode(10)
+def test_left_to_right_leaves():
+	root = BTNode(1)
+	root.left = BTNode(2)
+	root.left.left = BTNode(4)
+	root.right = BTNode(3)
+	root.right.left = BTNode(5)
+	root.right.left.left = BTNode(6)
+	root.right.left.right = BTNode(7)
+	root.right.right = BTNode(8)
+	root.right.right.left = BTNode(9)
+	root.right.right.right = BTNode(10)
+	left_to_right_leaves(root)
 
-# left_to_right_leaves(root)
+# test_left_to_right_leaves()
 
 def most_nodes_level(root):
 	max_nodes, max_level, curr_level = 0, 1, 1
@@ -99,12 +104,76 @@ def most_nodes_level(root):
 		curr_level += 1
 	return max_level
 
-root = BTNode(2)
-root.left = BTNode(1)
-root.left.left = BTNode(4)
-root.left.right = BTNode(6)
-root.left.right.left = BTNode(5)
-root.right = BTNode(3)
-root.right.right = BTNode(8)
+def test_most_nodes_level():
+	root = BTNode(2)
+	root.left = BTNode(1)
+	root.left.left = BTNode(4)
+	root.left.right = BTNode(6)
+	root.left.right.left = BTNode(5)
+	root.right = BTNode(3)
+	root.right.right = BTNode(8)
+	print most_nodes_level(root)
 
-# print most_nodes_level(root)
+# test_most_nodes_level()
+
+def iterative_pre_order(root):
+	s = [root]
+	while s:
+		curr = s.pop()
+		print curr.value,
+		if curr.right:
+			s.append(curr.right)
+		if curr.left:
+			s.append(curr.left)
+
+def test_iterative_pre_order():
+	root = BTNode(1)
+	root.left = BTNode(2)
+	root.right = BTNode(3)
+	root.left.left = BTNode(4)
+	root.left.right = BTNode(5)
+	root.right.left = BTNode(6)
+	root.right.right = BTNode(7)
+	iterative_pre_order(root) # 4, 5, 2, 6, 7, 3, 1
+	print
+
+def iterative_in_order(root):
+	s = [root]
+	while s:
+		while curr.left:
+			s.append(curr.left)
+		curr = s.pop()
+		print curr.value
+		if curr.right:
+			s.append(curr.right)
+
+test_iterative_pre_order()
+
+# def iterative_post_order(root):
+# 	left = []
+# 	right = []
+# 	left.append(root)
+# 	while len(left) + len(right) > 0:
+
+# 		if curr.left:
+# 			left.append(curr.left)
+# 		if curr.right:
+# 			right.append(curr.right)
+
+# 		if left:
+# 			curr = left.pop()
+# 		elif right:
+# 			curr = right.pop()
+
+# def test_iterative_post_order():
+# 	root = BTNode(1)
+# 	root.left = BTNode(2)
+# 	root.right = BTNode(3)
+# 	root.left.left = BTNode(4)
+# 	root.left.right = BTNode(5)
+# 	root.right.left = BTNode(6)
+# 	root.right.right = BTNode(7)
+# 	iterative_post_order(root) # 4, 5, 2, 6, 7, 3, 1
+# 	print
+
+# test_iterative_post_order()
