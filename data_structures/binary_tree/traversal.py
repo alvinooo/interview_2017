@@ -137,43 +137,64 @@ def test_iterative_pre_order():
 	iterative_pre_order(root) # 4, 5, 2, 6, 7, 3, 1
 	print
 
+# test_iterative_pre_order()
+
 def iterative_in_order(root):
+	curr = root
 	s = [root]
+	left_visited = False
 	while s:
-		while curr.left:
+		while curr.left and not left_visited:
 			s.append(curr.left)
+			curr = curr.left
+		left_visited = True
 		curr = s.pop()
-		print curr.value
+		print curr.value,
 		if curr.right:
 			s.append(curr.right)
+			curr = curr.right
+			left_visited = False
 
-test_iterative_pre_order()
+def test_iterative_in_order():
+	root = BTNode(1)
+	root.left = BTNode(2)
+	root.right = BTNode(3)
+	root.left.left = BTNode(4)
+	root.left.right = BTNode(5)
+	root.right.left = BTNode(6)
+	root.right.right = BTNode(7)
+	iterative_in_order(root) # 4, 5, 2, 6, 7, 3, 1
+	print
 
-# def iterative_post_order(root):
-# 	left = []
-# 	right = []
-# 	left.append(root)
-# 	while len(left) + len(right) > 0:
+test_iterative_in_order()
 
-# 		if curr.left:
-# 			left.append(curr.left)
-# 		if curr.right:
-# 			right.append(curr.right)
+def iterative_post_order(root):
+	left = []
+	right = []
+	left.append(root)
+	while len(left) + len(right) > 0:
 
-# 		if left:
-# 			curr = left.pop()
-# 		elif right:
-# 			curr = right.pop()
+		if curr.left:
+			left.append(curr.left)
+		if curr.right:
+			right.append(curr.right)
 
-# def test_iterative_post_order():
-# 	root = BTNode(1)
-# 	root.left = BTNode(2)
-# 	root.right = BTNode(3)
-# 	root.left.left = BTNode(4)
-# 	root.left.right = BTNode(5)
-# 	root.right.left = BTNode(6)
-# 	root.right.right = BTNode(7)
-# 	iterative_post_order(root) # 4, 5, 2, 6, 7, 3, 1
-# 	print
+		if left:
+			curr = left.pop()
+		elif right:
+			curr = right.pop()
+
+def test_iterative_post_order():
+	root = BTNode(1)
+	root.left = BTNode(2)
+	root.right = BTNode(3)
+	root.left.left = BTNode(4)
+	root.left.right = BTNode(5)
+	root.right.left = BTNode(6)
+	root.right.right = BTNode(7)
+	iterative_post_order(root) # 4, 5, 2, 6, 7, 3, 1
+	print
 
 # test_iterative_post_order()
+
+# TODO morris traversal
