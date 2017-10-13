@@ -166,23 +166,35 @@ def test_iterative_in_order():
 	iterative_in_order(root) # 4, 5, 2, 6, 7, 3, 1
 	print
 
-test_iterative_in_order()
+# test_iterative_in_order()
 
-def iterative_post_order(root):
-	left = []
-	right = []
-	left.append(root)
-	while len(left) + len(right) > 0:
-
+def iterative_post_order_two_stacks(root):
+	curr_stack = [root]
+	processed = []
+	while curr_stack:
+		curr = curr_stack.pop()
 		if curr.left:
-			left.append(curr.left)
+			curr_stack.append(curr.left)
 		if curr.right:
-			right.append(curr.right)
+			curr_stack.append(curr.right)
+		processed.append(curr)
+	while processed:
+		print processed.pop().value,
 
-		if left:
-			curr = left.pop()
-		elif right:
-			curr = right.pop()
+def iterative_post_order_one_stack(root):
+	stack = [root]
+	processed = False
+	while stack:
+		curr = stack[-1]
+		if curr.right:
+			stack.append(curr.right)
+			processed = False
+		if curr.left:
+			stack.append(curr.left)
+			processed = False
+
+		if stack and processed:
+			print curr.pop().value,
 
 def test_iterative_post_order():
 	root = BTNode(1)
@@ -192,9 +204,9 @@ def test_iterative_post_order():
 	root.left.right = BTNode(5)
 	root.right.left = BTNode(6)
 	root.right.right = BTNode(7)
-	iterative_post_order(root) # 4, 5, 2, 6, 7, 3, 1
+	iterative_post_order_two_stacks(root) # 4, 5, 2, 6, 7, 3, 1
 	print
 
-# test_iterative_post_order()
+test_iterative_post_order()
 
 # TODO morris traversal
