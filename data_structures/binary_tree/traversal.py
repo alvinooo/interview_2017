@@ -183,18 +183,17 @@ def iterative_post_order_two_stacks(root):
 
 def iterative_post_order_one_stack(root):
 	stack = [root]
-	processed = False
+	parent = None
 	while stack:
 		curr = stack[-1]
-		if curr.right:
-			stack.append(curr.right)
-			processed = False
-		if curr.left:
-			stack.append(curr.left)
-			processed = False
-
-		if stack and processed:
-			print curr.pop().value,
+		if not curr.left and not curr.right or curr == parent:
+			stack.pop()
+		else:
+			parent = curr
+			if curr.right:
+				stack.append(curr.right)
+			if curr.left:
+				stack.append(curr.left)
 
 def test_iterative_post_order():
 	root = BTNode(1)
