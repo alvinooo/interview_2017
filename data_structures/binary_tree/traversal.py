@@ -116,6 +116,64 @@ def test_most_nodes_level():
 
 # test_most_nodes_level()
 
+def spiral(root):
+	zig = [root]
+	zag = []
+	while zig or zag:
+		while zag:
+			curr = zag.pop()
+			if curr.right:
+				zig.append(curr.right)
+			if curr.left:
+				zig.append(curr.left)
+			print curr.value,
+		while zig:
+			curr = zig.pop()
+			if curr.left:
+				zag.append(curr.left)
+			if curr.right:
+				zag.append(curr.right)
+			print curr.value,
+
+def test_spiral():
+	# root = BTNode(1)
+	# root.left = BTNode(2)
+	# root.right = BTNode(3)
+	# root.left.left = BTNode(7)
+	# root.left.right = BTNode(6)
+	# root.right.left = BTNode(5)
+	# root.right.right = BTNode(4)
+	root = BTNode(3)
+	root.left = BTNode(9)
+	root.right = BTNode(20)
+	root.right.left = BTNode(15)
+	root.right.right = BTNode(7)
+	spiral(root)
+
+# test_spiral()
+
+def sum_paths(root, value=0):
+	if not root:
+		return 0
+	curr_sum = value * 10 + root.value
+	if not root.left and not root.right:
+		print curr_sum
+		return curr_sum
+	return sum_paths(root.left, curr_sum) + sum_paths(root.right, curr_sum)
+
+def test_sum_paths():
+	root = BTNode(6)
+	root.left = BTNode(3)
+	root.left.left = BTNode(2)
+	root.left.right = BTNode(5)
+	root.left.right.left = BTNode(7)
+	root.left.right.right = BTNode(4)
+	root.right = BTNode(5)
+	root.right.right = BTNode(4)
+	print sum_paths(root)
+
+# test_sum_paths()
+
 def iterative_pre_order(root):
 	s = [root]
 	while s:
@@ -206,6 +264,6 @@ def test_iterative_post_order():
 	iterative_post_order_two_stacks(root) # 4, 5, 2, 6, 7, 3, 1
 	print
 
-test_iterative_post_order()
+# test_iterative_post_order()
 
 # TODO morris traversal
