@@ -267,3 +267,51 @@ def test_iterative_post_order():
 # test_iterative_post_order()
 
 # TODO morris traversal
+
+def lca(root, n1, n2):
+	if not root:
+		return None
+	if root == n1 or root == n2:
+		return root
+	left = lca(root.left, n1, n2)
+	right = lca(root.right, n1, n2)
+	if left and right:
+		return root
+	return left if left else right
+
+def lca_bst(root, n1, n2):
+	if not root:
+		return None
+	elif n1.value < root.value and n2.value < root.value:
+		return lca_bst(root.left, n1, n2)
+	elif n1.value > root.value and n2.value > root.value:
+		return lca_bst(root.right, n1, n2)
+	else:
+		return root
+
+def test_lca():
+	root = BTNode(1)
+	root.left = BTNode(2)
+	root.right = BTNode(3)
+	root.left.left = BTNode(4)
+	root.left.right = BTNode(5)
+	root.right.left = BTNode(6)
+	root.right.right = BTNode(7)
+	print lca(root, root.left.left, root.left.right).value
+	print lca(root, root.left.left, root.right.left).value
+	print lca(root, root.right, root.left.left).value
+	print lca(root, root.left, root.left.left).value
+
+	root = BTNode(20)
+	root.left = BTNode(8)
+	root.left.left = BTNode(4)
+	root.left.right = BTNode(12)
+	root.left.right.left = BTNode(10)
+	root.left.right.right = BTNode(14)
+	root.right = BTNode(22)
+
+	print lca_bst(root, root.left.right.left, root.left.right.right).value
+	print lca_bst(root, root.left.right.right, root.left.left).value
+	print lca_bst(root, root.left.right.left, root.right).value
+
+test_lca()
