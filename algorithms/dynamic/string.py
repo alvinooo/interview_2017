@@ -36,8 +36,33 @@ def longest_common_substring(s1, s2):
 				lengths[i][j] = 0
 	return s1[i-max_length:i]
 
+def longest_common_substring_memory_optimized(s1, s2):
+	max_length, max_index = 0, 0
+	if len(s1) <= len(s2):
+		short_string, long_string = s1, s2
+	else:
+		short_string, long_string = s2, s1
+	prev_row = [0 for _ in xrange(len(short_string) + 1)]
+	curr_row = [0 for _ in xrange(len(short_string) + 1)]
+	for i in xrange(1, len(long_string) + 1):
+		for j in xrange(1, len(short_string) + 1):
+			if i == 0 or j == 0:
+				curr_row[j] = 0
+			elif long_string[i - 1] == short_string[j - 1]:
+				curr_row[j] = 1 + prev_row[j - 1]
+				if curr_row[j] > max_length:
+					max_length = curr_row[j]
+					max_j = j
+			else:
+				curr_row[j] = 0
+		for k in xrange(len(short_string) + 1):
+			prev_row[k] = curr_row[k]
+	return short_string[j-max_length:j]
+
 def test_longest_common_substring():
 	print longest_common_substring("caba", "abac")
+	print longest_common_substring_memory_optimized("caba", "abac")
 	print longest_common_substring("abacdfgdcaba", "abacdgfdcaba")
+	print longest_common_substring_memory_optimized("abacdfgdcaba", "abacdgfdcaba")
 
-test_longest_common_substring()
+# test_longest_common_substring()
