@@ -74,3 +74,18 @@ def test_rec_longest_common():
 	print longest_common("AGGTAB","GXTXAYB")
 
 # test_rec_longest_common()
+
+def max_sum_k_dist(l, k):
+	prev_max_ptr, prev_max_sum = 0, l[0]
+	sums = l[:]
+	for i in xrange(k + 1, len(l)):
+		prev_max_sum = max(prev_max_sum, sums[prev_max_ptr])
+		sums[i] = max(l[i] + prev_max_sum, sums[i - 1])
+		prev_max_ptr += 1
+	return sums[-1]
+
+def test_max_sum_k_dist():
+	print max_sum_k_dist([4, 5, 8, 7, 5, 4, 3, 4, 6, 5], 3)
+	print max_sum_k_dist([50, 70, 40, 50, 90, 70, 60, 40, 70, 50], 2)
+
+# test_max_sum_k_dist()
