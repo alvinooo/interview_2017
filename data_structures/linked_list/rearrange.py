@@ -51,3 +51,21 @@ def test_reverse():
 	print rec_reverse(LLNode(range(1,10)))
 
 # test_reverse()
+
+def odd_even(head):
+	head1, head2 = head, head.next
+	p1, p2 = head, head.next
+	while p2 and p2.next:
+		next1 = p1.next.next
+		next2 = p2.next.next
+		p1.next = p1.next.next
+		p2.next = p2.next.next
+		p1 = next1
+		p2 = next2
+	p1.next = head2
+	return head1
+
+def test_odd_even():
+	print odd_even(LLNode(range(1,10)))
+
+# test_odd_even()
