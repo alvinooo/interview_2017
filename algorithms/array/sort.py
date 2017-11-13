@@ -1,3 +1,18 @@
+def insertion(l):
+	for i in xrange(1, len(l)):
+		curr = l[i]
+		j = i - 1
+		while j >= 0 and l[j] > curr:
+			l[j + 1] = l[j]
+			j -= 1
+		l[j + 1] = curr
+	return l
+
+def test_insertion():
+	print insertion([5,2,4,6,1,3])
+
+test_insertion()
+
 def even_odd_index(l):
 	even_ptr, odd_ptr = 0, 1
 	while True:
