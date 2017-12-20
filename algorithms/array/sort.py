@@ -11,7 +11,7 @@ def insertion(l):
 def test_insertion():
 	print insertion([5,2,4,6,1,3])
 
-test_insertion()
+# test_insertion()
 
 def even_odd_index(l):
 	even_ptr, odd_ptr = 0, 1
@@ -30,3 +30,16 @@ def test_even_odd_index():
 	print even_odd_index([2,5,7,8,1,6,9])
 
 # test_even_odd_index()
+
+def move_zeroes_to_end(l):
+	curr_length = 0
+	for i in xrange(len(l)):
+		if l[i] != 0:
+			l[curr_length], l[i] = l[i], l[curr_length]
+			curr_length += 1
+	return l
+
+def test_move_zeroes_to_end():
+	print move_zeroes_to_end([0, 1, 0, 3, 12])
+
+test_move_zeroes_to_end()
