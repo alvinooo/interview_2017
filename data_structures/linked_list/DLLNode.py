@@ -13,6 +13,7 @@ class DLLNode(LLNode):
 			for item in value[1:]:
 				self.append(item)
 
+	# TODO refactor into queue
 	def dequeue(self):
 		head = self
 		self = self.next
@@ -27,6 +28,7 @@ class DLLNode(LLNode):
 		node.prev = self.last
 		self.last = self.last.next
 
+	# TODO refactor into queue
 	def remove(self, node):
 		if self == node:
 			self = self.next

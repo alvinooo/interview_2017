@@ -14,3 +14,5 @@ def test_product_except_self():
 	print product_except_self([1,2,3,4])
 
 # test_product_except_self()
+
+# http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/
